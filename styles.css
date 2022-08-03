@@ -104,7 +104,7 @@
     flex: 1;
     display: flex;
     justify-content: space-around;
-    padding: 5px 15px;
+    padding: 5px 15px 5px 0px;
 }
 
 .right-action-keys{
@@ -112,12 +112,15 @@
     flex-direction: column;
     flex: 1;
     gap: 18px;
-    padding: 5px 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
 }
 
 .key{
     display: block;
     border-radius: 15px;
+    box-sizing: border-box;
 }
 
 .upper-key{
