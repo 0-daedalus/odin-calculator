@@ -1,0 +1,138 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer{
+    width: 100%;
+    height: 72px;
+}
+
+.outer-layer{
+    width: 30%;
+    min-width: 550px;
+    height: 84%;
+    background-color: grey;
+    flex-shrink: 0;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid rgb(70, 69, 69);
+}
+
+.inner-layer{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: brown;
+    border: 2px solid rgb(75, 18, 18);
+    border-radius: 15px;
+    gap: 20px;
+}
+
+.display-container{
+    flex: 2;
+    padding: 8px;
+    box-sizing: border-box;
+
+}
+
+.display{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    background-color: rgba(127, 255, 212, 0.644);
+    border-radius: 10px;
+    color: black;
+    font-size: large;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 25px;
+}
+
+.key-container{
+    flex: 8;
+    box-sizing: border-box;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.upper-keys{
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0px;
+}
+
+.lower-keys{
+    width: 100%;
+    box-sizing: border-box;
+    flex: 4;
+    display: flex;
+}
+
+.number-keys{
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.row{
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 15px;
+}
+
+.right-action-keys{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 18px;
+    padding: 5px 10px;
+}
+
+.key{
+    display: block;
+    border-radius: 15px;
+}
+
+.upper-key{
+    width: 21%;
+}
+
+.number-key{
+    width: 27%;
+}
+
+.right-key{
+    flex: 1;
+    max-height: 93px;
+}
+
+.enter-key{
+    flex: 2;
+}
