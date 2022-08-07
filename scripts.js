@@ -53,6 +53,7 @@ function operate(operator, x, y){
         
         case 'factorial': return factorial(x);
         
+        default : return null;
     }
 }
 
@@ -60,11 +61,19 @@ function operate(operator, x, y){
 let display = document.querySelector('.display p');
 let displayValue = '';
 let isDecimal = false;
+let isChaining = false;
 
 function clear(){
     displayValue = '';
     isDecimal = false;
     display.textContent = displayValue;
+}
+
+function eraseData(){
+    num1 = num2 = null;
+    operator = '';    
+    isChaining = false;
+   operationFinished = false;
 }
 
 function update(){
@@ -88,8 +97,15 @@ numbers.forEach((key) => {
         }
         else if(key.id === 'clear'){
             clear();
+            eraseData()
         }
-        else displayValue += key.id;
+        else {
+            if(isChaining){
+                clear();
+                isChaining = false;
+            }
+            displayValue += key.id;
+        }
         update();
     });
 });
@@ -98,6 +114,17 @@ let operators = document.querySelectorAll('.operator');
 
 operators.forEach((key) => {
     key.addEventListener('click', () => {
+        if(num1){
+            num2 = +displayValue;
+            if(num2 === 0 && operator === 'divide') {display.textContent = "ERROR: can not divide by 0!"; eraseData(); return;}
+            displayValue = operate(operator, num1, num2);
+            update();
+            operator = key.id;
+            num1 = displayValue;
+            isChaining = true;
+            num2 = null;
+            return;
+        }
         operationFinished = false;
         num1 = +displayValue;
         clear();
@@ -110,6 +137,7 @@ let enter = document.querySelector('.enter-key');
 enter.addEventListener('click', () => {
     if(!operationFinished){
         num2 = +displayValue;
+        if(num2 === 0 && operator === 'divide') {display.textContent = "ERROR: can not divide by 0!"; eraseData();  return;}
         if(num1){
             displayValue = operate(operator, num1, num2);
             update();
@@ -119,3 +147,16 @@ enter.addEventListener('click', () => {
         }
 }
 })
+
+///////////////////////////////////////////////////////////////
+//Enter num1
+//Choose an operator (save num1 and operator)
+//Enter num2 
+//Choose action:
+//              Press Enter:                        Press operator:
+//
+//              Save num2                           Save num2
+//              Compute the value                   Compute the value
+//              Display the result                  Display the result
+//              Make num1 equal to result           Make num1 equal to result and operator = operator
+//              Nullify num2                        Nullify num2
