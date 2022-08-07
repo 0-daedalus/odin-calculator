@@ -69,21 +69,36 @@ function clear(){
     display.textContent = displayValue;
 }
 
+<<<<<<< HEAD
 function eraseData(){
     num1 = num2 = null;
     operator = '';    
     isChaining = false;
    operationFinished = false;
+=======
+function clearData(){
+    num1 = num2 = null;
+    operator = '';
+    displayValue = '';
+    operating = false;
+>>>>>>> b6be693 (More stable version)
 }
 
 function update(){
     display.textContent = displayValue;
 }
 
+function calculate(){
+    displayValue = operate(operator, num1, num2);
+    update();
+    num1 = num2 = null;
+}
+
 let num1 = null;
 let num2 = null;
 let operator = '';
-let operationFinished = false;
+let operating = false;
+let shouldClear = false;
 
 let numbers = document.querySelectorAll('.number-key');
 
@@ -96,6 +111,7 @@ numbers.forEach((key) => {
             }
         }
         else if(key.id === 'clear'){
+            clearData();
             clear();
             eraseData()
         }
@@ -106,6 +122,16 @@ numbers.forEach((key) => {
             }
             displayValue += key.id;
         }
+<<<<<<< HEAD
+=======
+        else {
+            if(shouldClear) {
+                clear();
+                shouldClear = false;
+            }
+            displayValue += key.id;
+        }
+>>>>>>> b6be693 (More stable version)
         update();
     });
 });
@@ -114,6 +140,7 @@ let operators = document.querySelectorAll('.operator');
 
 operators.forEach((key) => {
     key.addEventListener('click', () => {
+<<<<<<< HEAD
         if(num1){
             num2 = +displayValue;
             if(num2 === 0 && operator === 'divide') {display.textContent = "ERROR: can not divide by 0!"; eraseData(); return;}
@@ -126,6 +153,17 @@ operators.forEach((key) => {
             return;
         }
         operationFinished = false;
+=======
+        if(operating){
+            num2 = +displayValue;
+            calculate();
+            num1 = +displayValue;
+            operator = key.id;
+            shouldClear = true;
+            return;
+        }
+        operating = true;
+>>>>>>> b6be693 (More stable version)
         num1 = +displayValue;
         clear();
         operator = key.id;
@@ -135,15 +173,12 @@ operators.forEach((key) => {
 let enter = document.querySelector('.enter-key');
 
 enter.addEventListener('click', () => {
-    if(!operationFinished){
+    if(operating){
         num2 = +displayValue;
         if(num2 === 0 && operator === 'divide') {display.textContent = "ERROR: can not divide by 0!"; eraseData();  return;}
         if(num1){
-            displayValue = operate(operator, num1, num2);
-            update();
-            operationFinished = true;
-            num1 = null;
-            num2 = null;
+            calculate();
+            operating = false;
         }
 }
 })
