@@ -81,7 +81,11 @@ function clearData(){
     operator = '';
     displayValue = '';
     operating = false;
+<<<<<<< HEAD
 >>>>>>> b6be693 (More stable version)
+=======
+    hanging = false;
+>>>>>>> c77a6fc (Revert "Finish chaining, add / by 0 exception (for now)")
 }
 
 function update(){
@@ -99,6 +103,7 @@ let num2 = null;
 let operator = '';
 let operating = false;
 let shouldClear = false;
+let hanging = false;
 
 let numbers = document.querySelectorAll('.number-key');
 
@@ -155,12 +160,21 @@ operators.forEach((key) => {
         operationFinished = false;
 =======
         if(operating){
-            num2 = +displayValue;
-            calculate();
-            num1 = +displayValue;
-            operator = key.id;
-            shouldClear = true;
-            return;
+            if(displayValue != '') hanging = false;
+            if(!hanging){
+                num2 = +displayValue;
+                calculate();
+                num1 = +displayValue;
+                displayValue = '';
+                operator = key.id;
+                shouldClear = true;
+                hanging = true;
+                return;
+            }
+            else {
+                operator = key.id;
+                return;
+            }
         }
         operating = true;
 >>>>>>> b6be693 (More stable version)
