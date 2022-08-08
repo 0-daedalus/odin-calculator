@@ -73,6 +73,7 @@ function clearData(){
     displayValue = '';
     operating = false;
     hanging = false;
+    lastClick = '';
 }
 
 function update(){
@@ -94,9 +95,8 @@ function calculate(){
 let num1 = null;
 let num2 = null;
 let operator = '';
-let operating = false;
 let shouldClear = false;
-let hanging = false;
+let lastClick = '';
 
 let numbers = document.querySelectorAll('.number-key');
 
@@ -126,39 +126,37 @@ numbers.forEach((key) => {
 let operators = document.querySelectorAll('.operator');
 
 operators.forEach((key) => {
-    key.addEventListener('click', () => {
-        if(operating){
-            if(displayValue != '') hanging = false;
-            if(!hanging && displayValue != ''){
-                num2 = +displayValue;
-                calculate();
-                num1 = +displayValue;
-                displayValue = '';
-                operator = key.id;
-                shouldClear = true;
-                hanging = true;
-                return;
-            }
-            else {
-                operator = key.id;
-                return;
-            }
+    key.addEventListener('click', (e) => {
+        if(num1 && displayValue != ''){
+            num2 = +displayValue;
+            calculate();
+            num1 = +displayValue;
+            displayValue = '';
+            operator = key.id;
+            shouldClear = true;
+            lastClick = e.target.className;
+            return;
         }
-        operating = true;
+        else if(lastClick.includes('operator')){
+            operator = key.id;
+            return;
+        }
         num1 = +displayValue;
         clear();
         operator = key.id;
+        lastClick = e.target.className;
     });
 });
 
 let enter = document.querySelector('.enter-key');
 
-enter.addEventListener('click', () => {
-    if(operating){
+enter.addEventListener('click', (e) => {
+    if(lastClick.includes('enter')) return;
+    if(num1 && displayValue != ''){
         num2 = +displayValue;
-        if(num1){
-            calculate();
-            operating = false;
+        calculate();
+        num1 = num2 = null;
+        shouldClear = true;
+        lastClick = e.target.className;
         }
-}
 })
