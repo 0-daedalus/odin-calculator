@@ -52,7 +52,8 @@ function operate(operator, x, y){
         case 'sqrt': return sqrt(x);
         
         case 'factorial': return factorial(x);
-        
+
+        default : return;        
     }
 }
 

@@ -12,6 +12,6 @@ The calculator is going to contain such functions as:
     Factorial
     Clear and delete buttons
 
-TBD: ADD CHAINING CALCULATIONS
+TBD: CONNECT SCREEN KEYS TO KEYBOARD
 -------------------------------------------
 Here I will give credits yo the authors of images used (if any)
