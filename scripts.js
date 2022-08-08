@@ -80,6 +80,12 @@ function update(){
 }
 
 function calculate(){
+    if(operator === 'divide' && num2 === 0){
+        display.textContent = 'ERROR: cannot divide by 0';
+        clearData();
+        shouldClear = true;
+        return;
+    }
     displayValue = operate(operator, num1, num2);
     update();
     num1 = num2 = null;
