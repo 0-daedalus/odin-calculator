@@ -129,7 +129,7 @@ operators.forEach((key) => {
     key.addEventListener('click', () => {
         if(operating){
             if(displayValue != '') hanging = false;
-            if(!hanging){
+            if(!hanging && displayValue != ''){
                 num2 = +displayValue;
                 calculate();
                 num1 = +displayValue;
